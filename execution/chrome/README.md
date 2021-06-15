@@ -8,6 +8,7 @@ curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 sudo apt-get install -y nodejs
 #install puppeteer
 npm i puppeteer
+npm i commander
 ```
 ## Execution
 ### Ookla speedtest.net
