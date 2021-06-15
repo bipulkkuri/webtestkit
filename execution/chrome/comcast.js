@@ -54,6 +54,8 @@ var globaltimeout = 120000;
         var printerrname = "./" + tracename + ".err.png";
         var keyarg = "--ssl-key-log-file=./"+tracename+".key";
         var netlogarg = "--log-net-log=./"+tracename+".netlog";
+        console.log(`ip: ${program.opts().ip}`);
+        console.log(`host: ${program.opts().host}`);
         console.log("comcast:" + tracejson);
         // {headless: true}
         const browser = await puppeteer.launch({ headless: true , args: [keyarg, netlogarg] });
@@ -77,8 +79,8 @@ var globaltimeout = 120000;
                 fs.writeFileSync(errorfile, err);
                 page.screenshot({ path: printerrname })
             });
-
-        if (program.host) {
+              
+        if (program.opts().host) {
 
             await page.click('button.block > svg:nth-child(1)')
                 .catch((err) => {
@@ -109,8 +111,8 @@ var globaltimeout = 120000;
             var match = false;
             var hostname = undefined;
             for (var value of hosts) {
-                // console.log(value);
-                if (value.toUpperCase().indexOf(program.host.toUpperCase()) != -1) {
+                 console.log(value);
+                if (value.toUpperCase().indexOf(program.opts().host.toUpperCase()) != -1) {
                     console.log("match, host name =" + value);
                     hostname = value;
                     match = true;
