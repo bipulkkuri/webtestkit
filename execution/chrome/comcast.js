@@ -127,6 +127,15 @@ var globaltimeout = 120000;
 
             await page.select('#advanced-settings-host', hostname);
             await page.waitFor(2000);
+            //wait Start test button to enable
+            await page.waitForSelector('button.btn--rounded:nth-child(1)',{ visible: true, timeout: globaltimeout })
+            .catch((err) => {
+                console.log(err);
+                fs.writeFileSync(errorfile, "start test button error");
+                fs.writeFileSync(errorfile, err);
+                page.screenshot({ path: printerrname })
+            });
+
 
             await page.click('button.btn--rounded:nth-child(1)')
                 .catch((err) => {
